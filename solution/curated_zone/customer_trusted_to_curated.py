@@ -21,18 +21,18 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 job.init(args["JOB_NAME"], args)
 
-# Script generated for node customer_trusted
-customer_trusted_node1721337946203 = glueContext.create_dynamic_frame.from_catalog(
-    database="stedi-db",
-    table_name="customer_trusted",
-    transformation_ctx="customer_trusted_node1721337946203",
-)
-
 # Script generated for node accelerometer_trusted
 accelerometer_trusted_node1721337975384 = glueContext.create_dynamic_frame.from_catalog(
     database="stedi-db",
     table_name="accelerometer_trusted",
     transformation_ctx="accelerometer_trusted_node1721337975384",
+)
+
+# Script generated for node customer_trusted
+customer_trusted_node1721337946203 = glueContext.create_dynamic_frame.from_catalog(
+    database="stedi-db",
+    table_name="customer_trusted",
+    transformation_ctx="customer_trusted_node1721337946203",
 )
 
 # Script generated for node SQL Query
@@ -56,6 +56,10 @@ customer_curated_node1721338420832 = glueContext.write_dynamic_frame.from_catalo
     frame=SQLQuery_node1721338056988,
     database="stedi-db",
     table_name="customer_curated",
+    additional_options={
+        "enableUpdateCatalog": True,
+        "updateBehavior": "UPDATE_IN_DATABASE",
+    },
     transformation_ctx="customer_curated_node1721338420832",
 )
 

@@ -61,17 +61,16 @@ SQLQuery_node1721325073022 = sparkSqlQuery(
     transformation_ctx="SQLQuery_node1721325073022",
 )
 
-# Script generated for node step_trainer_trusted
-step_trainer_trusted_node1721327346641 = glueContext.write_dynamic_frame.from_options(
+# Script generated for node AWS Glue Data Catalog
+AWSGlueDataCatalog_node1721347916483 = glueContext.write_dynamic_frame.from_catalog(
     frame=SQLQuery_node1721325073022,
-    connection_type="s3",
-    format="json",
-    connection_options={
-        "path": "s3://tuchka-tuchka-ne-medved/step_trainer/trusted/",
-        "compression": "snappy",
-        "partitionKeys": [],
+    database="stedi-db",
+    table_name="step_trainer_trusted",
+    additional_options={
+        "enableUpdateCatalog": True,
+        "updateBehavior": "UPDATE_IN_DATABASE",
     },
-    transformation_ctx="step_trainer_trusted_node1721327346641",
+    transformation_ctx="AWSGlueDataCatalog_node1721347916483",
 )
 
 job.commit()

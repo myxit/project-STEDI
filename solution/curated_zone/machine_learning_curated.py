@@ -40,7 +40,6 @@ SqlQuery0 = """
 select step_trainer_trusted.* 
 from step_trainer_trusted
 join accelerometer_trusted on step_trainer_trusted.sensorReadingTime = accelerometer_trusted.timestamp
-
 """
 SQLQuery_node1721345069432 = sparkSqlQuery(
     glueContext,
@@ -57,6 +56,10 @@ AWSGlueDataCatalog_node1721345369835 = glueContext.write_dynamic_frame.from_cata
     frame=SQLQuery_node1721345069432,
     database="stedi-db",
     table_name="machine_learning_curated",
+    additional_options={
+        "enableUpdateCatalog": True,
+        "updateBehavior": "UPDATE_IN_DATABASE",
+    },
     transformation_ctx="AWSGlueDataCatalog_node1721345369835",
 )
 
